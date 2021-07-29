@@ -15,6 +15,10 @@ export default function OpenInterestCard({token, exchangeData}) {
         setIsOpenTable(false);
     };
 
+    function formatMoney(number) {
+        return number.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    }
+
     const Collapse = ({isOpen, children}) => {
         const ref = useRef(null);
         const inlineStyle = isOpen ? {height: ref.current?.scrollHeight} : {height: 0};
@@ -31,8 +35,8 @@ export default function OpenInterestCard({token, exchangeData}) {
     return (
         <div>
             <div
-                className="flex flex-row items-center py-1 px-4 max-w-full text-white bg-gray-900 border-b border-gray-600">
-                <button className="ml-2 mr-4 focus:outline-none"
+                className="grid grid-flow-col grid-cols-8 grid-rows-1 justify-items-end justify-self-center justify-between py-1 px-4 max-w-full text-white bg-gray-900 border-b border-gray-600">
+                <button className="focus:outline-none"
                         onClick={toggleTable}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24"
@@ -42,7 +46,7 @@ export default function OpenInterestCard({token, exchangeData}) {
                     </svg>
                 </button>
                 <button
-                    className="ml-2 mr-4 focus:outline-none"
+                    className="focus:outline-none"
                     onClick={toggleChart}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24"
@@ -52,15 +56,13 @@ export default function OpenInterestCard({token, exchangeData}) {
                     </svg>
                 </button>
 
-                <div
-                    className="text-1xl font-light pl-3 md:pl-6 w-full grid grid-flow-col grid-cols-6 grid-rows-1 gap-4 justify-items-end">
-                    <p>{token.symbol}</p>
-                    <p>{token.openInterest}</p>
-                    <p>{token.openInterestAmount}</p>
-                    <p>{token.h1OIChangePercent}</p>
-                    <p>{token.h4OIChangePercent}</p>
-                    <p>{token.h24Change}</p>
-                </div>
+                <p>{token.symbol}</p>
+                <p>{formatMoney(token.openInterest)}</p>
+                <p>{token.openInterestAmount}</p>
+                <p className={`${token.h1OIChangePercent > 0 ? 'text-green-300' : 'text-red-300'}`} >{token.h1OIChangePercent.toFixed(2)+"%"}</p>
+                <p className={`${token.h4OIChangePercent > 0 ? 'text-green-300' : 'text-red-300'}`} >{token.h4OIChangePercent.toFixed(2)+"%"}</p>
+                <p className={`${token.h24Change > 0 ? 'text-green-300' : 'text-red-300'}`} >{token.h24Change.toFixed(2)+"%"}</p>
+
             </div>
             <Collapse isOpen={isOpenTable}>
                 <div
@@ -78,17 +80,18 @@ export default function OpenInterestCard({token, exchangeData}) {
                         className="text-md font-thin pl-3 md:pl-6 w-full px-4 grid grid-flow-col grid-cols-7 justify-items-end text-white bg-gray-800 ">
                         <img style={{height: 16}} src={exchange.exchangeLogo} alt="exchange"/>
                         <p>{exchange.exchangeName}</p>
-                        <p>{exchange.openInterest}</p>
+                        <p>{formatMoney(exchange.openInterest)}</p>
                         <p>{exchange.openInterestAmount}</p>
-                        <p>{exchange.h1OIChangePercent}</p>
-                        <p>{exchange.h4OIChangePercent}</p>
-                        <p>{exchange.h24Change}</p>
+                        <p className={`${exchange.h24Change > 0 ? 'text-green-300' : 'text-red-300'}`} >{exchange.h1OIChangePercent.toFixed(2)+"%"}</p>
+                        <p className={`${exchange.h24Change > 0 ? 'text-green-300' : 'text-red-300'}`} >{exchange.h4OIChangePercent.toFixed(2)+"%"}</p>
+                        <p className={`${exchange.h24Change > 0 ? 'text-green-300' : 'text-red-300'}`} >{exchange.h24Change.toFixed(2)+"%"}</p>
                     </div>
                 ))}
             </Collapse>
-            {/*<Collapse isOpen={isOpenChart}>*/}
-            {/*    <OpenInterestChart/>*/}
-            {/*</Collapse>*/}
+            <Collapse isOpen={isOpenChart}>
+                {/*<OpenInterestChart/>*/}
+                <p>chart</p>
+            </Collapse>
         </div>
     );
 }

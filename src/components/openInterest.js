@@ -39,8 +39,9 @@ export default function OpenInterest() {
 
             <div className="flex flex-row items-center py-4 px-4 rounded-b rounded-2xl max-w-full text-white bg-gray-900 border-b border-gray-600 shadow-lg">
                 <div
-                    className="text-md font-medium w-full grid grid-flow-col grid-cols-7 justify-items-end">
-                    <p>{" "}</p>
+                    className="text-lg font-medium w-full grid grid-flow-col grid-cols-8 justify-items-end justify-self-center justify-between">
+                    <p>Data</p>
+                    <p>Chart</p>
                     <p>Token</p>
                     <p>OI (USD)</p>
                     <p>OI (Token)</p>
