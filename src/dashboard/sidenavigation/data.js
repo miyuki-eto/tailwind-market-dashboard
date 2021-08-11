@@ -6,11 +6,16 @@
 import DocumentationIcon from './icons/documentation';
 
 const data = [
-  {
-    title: 'Open Interest',
-    icon: <DocumentationIcon />,
-    link: '/openinterest',
-  },
+    {
+        title: 'Open Interest',
+        icon: <DocumentationIcon/>,
+        link: '/openinterest',
+    },
+    {
+        title: 'NFTs',
+        icon: <DocumentationIcon/>,
+        link: '/nft',
+    },
 ];
 
 export default data;
