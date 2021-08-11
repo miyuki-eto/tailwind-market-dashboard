@@ -1,6 +1,6 @@
 import React, {useState, useRef} from "react";
 
-// import OpenInterestChart from "./openInterestChart";
+import OpenInterestChart from "./openInterestChart";
 
 export default function OpenInterestCard({token, exchangeData}) {
 
@@ -35,7 +35,7 @@ export default function OpenInterestCard({token, exchangeData}) {
     return (
         <div>
             <div
-                className="grid grid-flow-col grid-cols-8 grid-rows-1 justify-items-end justify-self-center justify-between py-1 px-4 max-w-full text-white bg-gray-900 border-b border-gray-600">
+                className="grid grid-flow-col grid-cols-8 grid-rows-1 justify-items-end justify-self-center justify-between py-1 px-4 max-w-full text-white bg-custom-bg border-b border-gray-600">
                 <button className="focus:outline-none"
                         onClick={toggleTable}
                 >
@@ -66,7 +66,7 @@ export default function OpenInterestCard({token, exchangeData}) {
             </div>
             <Collapse isOpen={isOpenTable}>
                 <div
-                    className="text-md font-medium pl-3 md:pl-6 w-full px-4 grid grid-flow-col grid-cols-7 justify-items-end text-white bg-gray-800 ">
+                    className="text-md font-medium pl-3 md:pl-6 w-full px-4 grid grid-flow-col grid-cols-7 justify-items-end text-white bg-custom-bga ">
                     <p>{" "}</p>
                     <p>Exchange</p>
                     <p>OI (USD)</p>
@@ -77,7 +77,7 @@ export default function OpenInterestCard({token, exchangeData}) {
                 </div>
                 {exchangeData.map(exchange => (
                     <div
-                        className="text-md font-thin pl-3 md:pl-6 w-full px-4 grid grid-flow-col grid-cols-7 justify-items-end text-white bg-gray-800 ">
+                        className="text-md font-thin pl-3 md:pl-6 w-full px-4 grid grid-flow-col grid-cols-7 justify-items-end text-white bg-custom-bga ">
                         <img style={{height: 16}} src={exchange.exchangeLogo} alt="exchange"/>
                         <p>{exchange.exchangeName}</p>
                         <p>{formatMoney(exchange.openInterest)}</p>
@@ -89,7 +89,7 @@ export default function OpenInterestCard({token, exchangeData}) {
                 ))}
             </Collapse>
             <Collapse isOpen={isOpenChart}>
-                {/*<OpenInterestChart/>*/}
+                <OpenInterestChart key={token.symbol} token={token.symbol}/>
                 <p>chart</p>
             </Collapse>
         </div>

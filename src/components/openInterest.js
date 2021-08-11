@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from "react";
-import OpenInterestCard from "./subcomponents/openInterestCard";
 import axios from "axios";
+
+import OpenInterestCard from "./subcomponents/openInterestCard";
+import OpenInterestChart from "./subcomponents/openInterestChart";
+
 
 export default function OpenInterest() {
 
@@ -37,11 +40,12 @@ export default function OpenInterest() {
     }
 
     return (
-        <div className="px-4 py-8 rounded-3xl max-w-full text-white bg-gray-800 shadow-inner">
+        <div className="px-4 py-8 rounded-3xl max-w-full text-white bg-custom-bga shadow-inner">
             <h2 className="text-2xl font-medium mb-10 pl-1 md:pl-3">Open Interest</h2>
+            {/*<OpenInterestChart key={"BTC"} token={"BTC"}/>*/}
 
             <div
-                className="flex flex-row items-center py-4 px-4 rounded-b rounded-2xl max-w-full text-white bg-gray-900 border-b border-gray-600 shadow-lg">
+                className="flex flex-row items-center py-4 px-4 rounded-b rounded-2xl max-w-full text-white bg-custom-bg border-b border-gray-600 shadow-lg">
                 <div
                     className="text-lg font-medium w-full grid grid-flow-col grid-cols-8 justify-items-end justify-self-center justify-between">
                     <p>Data</p>
