@@ -1,8 +1,8 @@
 import React, {useState, useRef} from "react";
 
-// import OpenInterestChart from "./openInterestChart";
+import OpenInterestChart from "./openInterestChart";
 
-export default function OpenInterestCard({token, exchangeData}) {
+export default function OpenInterestCard({token, exchangeData, chartData}) {
 
     const [isOpenTable, setIsOpenTable] = useState(false);
     const [isOpenChart, setIsOpenChart] = useState(false);
@@ -89,8 +89,9 @@ export default function OpenInterestCard({token, exchangeData}) {
                 ))}
             </Collapse>
             <Collapse isOpen={isOpenChart}>
-                {/*<OpenInterestChart/>*/}
-                <p>chart</p>
+                <OpenInterestChart
+                    chartData={chartData}
+                />
             </Collapse>
         </div>
     );

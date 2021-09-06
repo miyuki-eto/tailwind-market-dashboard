@@ -6,11 +6,13 @@ export default function OpenInterest() {
 
     const [dataOiALL, setDataOiALL] = useState([]);
     const [dataOiEX, setDataOiEX] = useState([]);
+    const [chartData, setChartData] = useState([]);
 
     function updateData() {
         const tokens = ["BTC", "ETH", "LINK", "UNI", "DOT", "SNX", "SUSHI", "BNB", "AAVE", "YFI", "MKR", "SOL", "LTC", "DOGE"];
         setDataOiALL([])
         setDataOiEX([])
+        setChartData([])
         getDataOi(tokens)
 
     }
@@ -21,6 +23,7 @@ export default function OpenInterest() {
 
     function getDataOi(tokens) {
         const prefix = "https://fapi.bybt.com/api/openInterest/pc/info?symbol=";
+        const prefixChart = "https://fapi.bybt.com/api/openInterest/v3/chart?symbol=";
         Promise.all(tokens.map(u => axios.get(prefix + u)))
             .then(responses =>
                 responses.map(results => {
@@ -34,6 +37,29 @@ export default function OpenInterest() {
                     }
                 )
             )
+        Promise.all(tokens.map(u => axios.get(prefixChart + u + "&timeType=10&exchangeName=&type=0")))
+            .then(responses =>
+                responses.map(response => {
+                    const result = Object.keys(response.data.data.dataMap).reduce(function (r, k) {
+                                    response.data.data.dataMap[k].forEach(function (a, i) {
+                                        r[i] = (r[i] || 0) + a;
+                                    });
+                                    return r;
+                                }, []);
+                                // console.log(result)
+                                const prices = response.data.data.priceList
+                                const dates = response.data.data.dateList.map(x => new Date(x).toLocaleTimeString("en-US"))
+                                const data = result.map((x, i) => ({
+                                    oi: x,
+                                    price: prices[i],
+                                    date: dates[i]
+                                }));
+                                setChartData(oldData => [...oldData, data])
+                    // console.log(data)
+                    }
+                )
+            )
+        console.log(chartData)
     }
 
     return (
@@ -54,9 +80,11 @@ export default function OpenInterest() {
                     <p>24H Change</p>
                 </div>
             </div>
-            {dataOiALL.map(token => (
+            {dataOiALL.map((token, index) => (
                 <OpenInterestCard key={token.symbol} token={token}
-                                  exchangeData={dataOiEX.filter(row => row.symbol === token.symbol)}/>
+                                  exchangeData={dataOiEX.filter(row => row.symbol === token.symbol)}
+                                  chartData={chartData[index]}
+                />
             ))}
 
         </div>
