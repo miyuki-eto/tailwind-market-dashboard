@@ -9,7 +9,8 @@ export default function OpenInterest() {
     const [chartData, setChartData] = useState([]);
 
     function updateData() {
-        const tokens = ["BTC", "ETH", "LINK", "UNI", "DOT", "SNX", "SUSHI", "BNB", "AAVE", "YFI", "MKR", "SOL", "LTC", "DOGE"];
+        // const tokens = ["BTC", "ETH", "LINK", "UNI", "DOT", "SNX", "SUSHI", "BNB", "AAVE", "YFI", "MKR", "SOL", "LTC", "DOGE"];
+        const tokens = ["BTC", "ETH"];
         setDataOiALL([])
         setDataOiEX([])
         setChartData([])
