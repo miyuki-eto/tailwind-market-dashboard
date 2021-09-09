@@ -1,6 +1,6 @@
 import React, {useState, useRef} from "react";
 
-import OpenInterestChart from "./openInterestChart";
+// import OpenInterestChart from "./openInterestChart";
 
 export default function OpenInterestCard({token, exchangeData, chartData}) {
 
