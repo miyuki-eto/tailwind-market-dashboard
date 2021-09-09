@@ -58,7 +58,7 @@ export default function OpenInterestCard({token, exchangeData, chartData}) {
 
                 <p>{token.symbol}</p>
                 <p>{formatMoney(token.openInterest)}</p>
-                <p>{token.openInterestAmount}</p>
+                <p>{token.openInterestAmount.toFixed(2)}</p>
                 <p className={`${token.h1OIChangePercent > 0 ? 'text-green-300' : 'text-red-300'}`} >{token.h1OIChangePercent.toFixed(2)+"%"}</p>
                 <p className={`${token.h4OIChangePercent > 0 ? 'text-green-300' : 'text-red-300'}`} >{token.h4OIChangePercent.toFixed(2)+"%"}</p>
                 <p className={`${token.h24Change > 0 ? 'text-green-300' : 'text-red-300'}`} >{token.h24Change.toFixed(2)+"%"}</p>
@@ -81,7 +81,7 @@ export default function OpenInterestCard({token, exchangeData, chartData}) {
                         <img style={{height: 16}} src={exchange.exchangeLogo} alt="exchange"/>
                         <p>{exchange.exchangeName}</p>
                         <p>{formatMoney(exchange.openInterest)}</p>
-                        <p>{exchange.openInterestAmount}</p>
+                        <p>{exchange.openInterestAmount.toFixed(2)}</p>
                         <p className={`${exchange.h24Change > 0 ? 'text-green-300' : 'text-red-300'}`} >{exchange.h1OIChangePercent.toFixed(2)+"%"}</p>
                         <p className={`${exchange.h24Change > 0 ? 'text-green-300' : 'text-red-300'}`} >{exchange.h4OIChangePercent.toFixed(2)+"%"}</p>
                         <p className={`${exchange.h24Change > 0 ? 'text-green-300' : 'text-red-300'}`} >{exchange.h24Change.toFixed(2)+"%"}</p>
@@ -89,9 +89,10 @@ export default function OpenInterestCard({token, exchangeData, chartData}) {
                 ))}
             </Collapse>
             <Collapse isOpen={isOpenChart}>
-                <OpenInterestChart
-                    chartData={chartData}
-                />
+                {/*<OpenInterestChart*/}
+                {/*    chartData={chartData}*/}
+                {/*/>*/}
+                <p>chart</p>
             </Collapse>
         </div>
     );
